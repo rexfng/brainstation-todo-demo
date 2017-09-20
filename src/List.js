@@ -11,7 +11,7 @@ class List extends Component {
         this.state = ({
         	list:[
         		{
-        			todo_id: shortid.generate(),
+        			id: shortid.generate(),
         			text: "",
         			done: false
         		}
@@ -21,7 +21,6 @@ class List extends Component {
     }
     componentDidMount() {
         axios.get('https://brainstation-todo-server.herokuapp.com/api/v1/todos').then((response) => {
-        	console.log(response.data)
 		    this.setState({
 		    	list: response.data,
 		    })
@@ -30,24 +29,24 @@ class List extends Component {
 		    console.log(error);
 		  });    	
     }
-    onAddTask = (item, todo_id) => {
+    onAddTask = (item, id) => {
     	let updateObj = {}
     	switch (item.attributes['data-type'].value){
     		case "text" :
     			updateObj.text = item.value
-		     	var selectedItem = _.filter(this.state.list,{ todo_id: todo_id });
+		     	var selectedItem = _.filter(this.state.list,{ id: id });
 		    	selectedItem = Object.assign(selectedItem[0], updateObj)
 		    	this.setState([...this.state.list, selectedItem])
-			    axios.post('https://brainstation-todo-server.herokuapp.com/api/v1/todos', selectedItem)
+		    	console.log(id)
     			break;
     		case "checkbox" :
     			updateObj.done = (item.classList.contains('fa-check-square-o') ? true : false)
-		    	var selectedItem = _.filter(this.state.list,{ todo_id: todo_id });
+		    	var selectedItem = _.filter(this.state.list,{ id: id });
 		    	selectedItem = Object.assign(selectedItem[0], updateObj)
 		    	this.setState([...this.state.list, selectedItem])
     			break;
     		case "delete" :
-		    	let filterArr = _.reject(this.state.list,{ todo_id: todo_id });
+		    	let filterArr = _.reject(this.state.list,{ id: id });
 		    	this.setState({list: filterArr})
 		    	break;
     		default :
@@ -56,11 +55,11 @@ class List extends Component {
 
     }
     updateMode = (e) => {
-    	this.setState({ mode: e.target.attributes.todo_id.value })
+    	this.setState({ mode: e.target.attributes.id.value })
     }
     addEmptyItem = (e) => {
     	var obj = this.state.list.push({
-    		todo_id: shortid.generate(),
+    		id: shortid.generate(),
     		text: "",
     		done: false
     	})
