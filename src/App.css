@@ -1,0 +1,73 @@
+nav{
+  display: flex;
+  width: 300px;
+  margin: 0 auto;
+}
+nav h3{
+  padding: 1em;
+}
+ul{
+  width: 300px;
+  margin: 0 auto;
+  padding: 0;
+}
+ul div{
+  width: 100%;
+}
+ul div div{
+  padding: 1em;
+  background-color: white;
+  filter: drop-shadow(7px 5px 29px rgba(0,0,0,.2));
+}
+ul div div:hover{
+    filter: drop-shadow(7px 5px 29px rgba(0,0,0,.4));
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+    cursor:pointer;  
+}
+i{
+  padding: 0 1em;
+}
+ul div input{
+  width: 100%;
+  border: none;
+  outline: none;  
+}
+input.done{
+  text-decoration: line-through;
+}
+
+ul div div{
+  display: flex;
+}
+
+ul.unfinished div[data-done="true"]{
+  display: none;
+}
+ul.finished div[data-done="false"]{
+  display: none;
+}
+div.add{
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  padding:.3em;
+  font-size: 1.2em;
+  background-color: white;
+  filter: drop-shadow(7px 5px 29px rgba(0,0,0,.4));  
+  position: absolute;
+  bottom:100px;
+  right: 100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+div.add:hover{
+    filter: drop-shadow(7px 5px 29px rgba(0,0,0,.4));
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+    cursor:pointer;    
+}
+div.add i{
+  padding: .3em;
+}
